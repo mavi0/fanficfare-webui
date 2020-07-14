@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>FanFicFare Ebook Generator</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed&display=swap');
+
+        ::-moz-selection {
+            background: #b3d4fc;
+            text-shadow: none;
+        }
+
+        ::selection {
+            background: #b3d4fc;
+            text-shadow: none;
+        }
+
+        html {
+            padding: 30px 10px;
+            font-size: 20px;
+            line-height: 1.4;
+            color: #737373;
+            background: #ecf0f1;
+        }
+
+        html {
+            padding: 30px 10px;
+            font-size: 20px;
+            color: #737373;
+            background: #ecf0f1;
+        }
+
+        body {
+            max-width: 600px;
+            _width: 600px;
+            padding: 30px 20px 50px;
+            border: 1px solid #b3b3b3;
+            border-radius: 4px;
+            margin: 0 auto;
+            box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+            background: #fcfcfc;
+        }
+
+        h1 {
+            margin: 0 10px;
+            font-size: 50px;
+            text-align: center;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        h3 {
+            margin: 1.5em 0 0.5em;
+        }
+
+        p {
+            margin: 1em 0;
+            font-family: 'Roboto', sans-serif;
+            text-align: justify;
+            font-size: 20px;
+        }
+
+        ul {
+            padding: 0 0 0 40px;
+            margin: 1em 0;
+        }
+
+        a {
+            text-align: center;
+            color: #d64937;
+        }
+
+        .btn-primary:hover {
+            background-color: #37c4d6;
+            border-color: #37c4d6;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background-color: #d64937;
+            border-color: #d64937;
+            width: 100%;
+        }
+
+        a:hover {
+            color: #bbb;
+        }
+
+        .container {
+            max-width: 500px;
+            _width: 380px;
+            margin: 0 auto;
+        }
+
+        #subjectDetails {
+            font-family: 'Roboto', sans-serif;
+            text-align: left;
+            font-size: 20px;
+        }
+
+        .input {
+            width: 100%;
+        }
+
+
+    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>FanFicFare Ebook Generator</h1>
+        <p>Enter a url to generate an ebook in epub format. Examples of valid url formats can be found <a href="https://github.com/JimmXinu/FanFicFare/wiki/SupportedSites">here</a>.</p>
+        <form action="/genbook" id="url_form" method="post">
+            <input type="text" name="url" class="input" placeholder="https://example.com/a/book" required><br><br>
+            <input onClick="alert_click()" class="btn btn-primary" type="submit" value="Submit">        
+        </form>
+        
+        <script type="text/javascript">
+            function alert_click()
+            {
+                alert("This may take some time... (sometimes a few minutes) Please do not leave this page, your book will download automatically!");
+            }
+          </script>
+</body>
+
+</html>
