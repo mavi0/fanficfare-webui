@@ -39,4 +39,4 @@ networks:
 ```
 
 
-## Uses FanFicFare - see their Original Repo: [FanFicFare](https://github.com/JimmXinu/FanFicFare)
+Uses FanFicFare - see their Original Repo: [FanFicFare](https://github.com/JimmXinu/FanFicFare)
