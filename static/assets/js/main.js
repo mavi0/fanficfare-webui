@@ -74,4 +74,8 @@
 function alert_click()
 {
     alert("This may take some time - sometimes a few minutes... Please do not leave this page, your book will download automatically!");
+    document.getElementById("progress-bar").style.display = "block"; 
+    // $(".progress-bar").show();
+
+
 }

@@ -35,7 +35,7 @@ func genbook(c echo.Context) error {
 
 	fmt.Println("Processing: " + url)
 
-	out, err := exec.Command("fanficfare", "-j", url).Output()
+	out, err := exec.Command("fanficfare", "--non-interactive", "-o", "is_adult=true", "-j", url).Output()
 	if err != nil {
 		fmt.Printf("fanficfare failed with %s\n", err)
 		return c.HTML(http.StatusInternalServerError, "Could not generate epub: FanFicFare internal error")

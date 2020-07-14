@@ -381,6 +381,13 @@ iframe {
 /*------------------------------------------------------------------
 [ Alert validate ]*/
 
+
+#progress-bar {
+  display: none;
+  margin-top: 3rem;
+}
+
+
 .validate-input {
   position: relative;
 }
