@@ -1,6 +1,6 @@
 # A lightweight Dockerised web frontend for FanFicFare
 
-Written in go!
+Written in go! Uses the most recent release of FanFicFare at time of building.
 
 The site demo: [fanficfare.eleanor.servicies](https://fanficfare.eleanor.services) - a proper domain is coming soon, promise 100%
 
@@ -43,6 +43,7 @@ networks:
   default:
     driver: bridge
 ```
+
 
 
 Uses FanFicFare - see their Original Repo: [FanFicFare](https://github.com/JimmXinu/FanFicFare)
