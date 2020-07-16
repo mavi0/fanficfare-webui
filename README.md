@@ -1,8 +1,14 @@
 # A lightweight Dockerised web frontend for FanFicFare
 
-The site demo: [fanficfare.eleanor.servicies](https://fanficfare.eleanor.services) - a proper domain is coming soon, promise!
+Written in go!
 
-Deployment example with Traefik:
+The site demo: [fanficfare.eleanor.servicies](https://fanficfare.eleanor.services) - a proper domain is coming soon, promise 100%
+
+Docker hub: https://hub.docker.com/r/mavi0/fanficfare
+
+Docker run example: `docker run -p 80:80 mavi0/fanficfare:latest`
+
+Docker-compose deployment example with Traefik:
 
 ```yaml
 version: "3.7"
@@ -23,8 +29,8 @@ services:
       - traefik.enable=true
       - traefik.http.routers.fanficfare.entrypoints=web
       - traefik.http.routers.fanficfare-sec.entrypoints=websecure
-      - traefik.http.routers.fanficfare.rule=Host(`fanficfare.eleanor.services`)
-      - traefik.http.routers.fanficfare-sec.rule=Host(`fanficfare.eleanor.services`)
+      - traefik.http.routers.fanficfare.rule=Host(`fanficfare.${DOMAIN}`)
+      - traefik.http.routers.fanficfare-sec.rule=Host(`fanficfare.${DOMAIN})
       - traefik.http.services.fanficfare-sec.loadbalancer.server.port=80
       - traefik.http.routers.fanficfare.middlewares=basic-http
       - traefik.http.routers.fanficfare-sec.middlewares=basic
