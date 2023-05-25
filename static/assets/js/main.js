@@ -2,7 +2,6 @@
 (function ($) {
     "use strict";
 
-
      /*==================================================================
     [ Focus input ]*/
     $('.input100').each(function(){
@@ -66,7 +65,24 @@
         $(thisAlert).removeClass('alert-validate');
     }
     
-    
+    function getURLParam() {
+        const url_params = window.location.search.substring(1).split("&");
+        for (let i=0;i<url_params.length;i++) {
+            const key_value = url_params[i].split("=");
+            if (key_value[0] == "url") {
+                return key_value[1];
+            }
+        }    
+    }
+
+    const urlInParam = getURLParam();
+    if (urlInParam) {
+        $('.input100').each(function(){
+            $(this).focus();
+            $(this).val(urlInParam);
+            $(this).blur();
+        });
+    }
 
 })(jQuery);
 
