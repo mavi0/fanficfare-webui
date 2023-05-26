@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"net/http"
 	"os/exec"
+	"net/url"
 
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/microcosm-cc/bluemonday"
 )
 
@@ -21,12 +22,14 @@ func main() {
 	e.Static("/assets", "static/assets")
 	e.File("/", "static/index.html")
 
-	e.POST("/genbook", genbook)
+	e.POST("/downloadAndGet", downloadAndGet)
+	e.POST("/triggerDownload", triggerDownload)
+	e.GET("/book/:filename", getBook)
 
 	e.Logger.Info(e.Start(":80"))
 }
 
-func genbook(c echo.Context) error {
+func downloadbook(c echo.Context) string {
 	p := bluemonday.NewPolicy()
 	p.AllowStandardURLs()
 	p.AllowURLSchemes("http", "https")
@@ -35,14 +38,17 @@ func genbook(c echo.Context) error {
 
 	fmt.Println("Processing: " + url)
 
-	out, err := exec.Command("fanficfare", "--non-interactive", "-o", "is_adult=true", "-j", url).Output()
+	cmd := exec.Command("fanficfare", "--non-interactive", "-o", "is_adult=true", "-j", url)
+	cmd.Dir = "./books"
+	out, err := cmd.Output()
 	if err != nil {
 		fmt.Printf("fanficfare failed with %s\n", err)
-		return c.HTML(http.StatusInternalServerError, "Could not generate epub: FanFicFare internal error")
+		panic("Could not generate epub: FanFicFare internal error")
 	}
 
 	if string(out[0]) == "B" {
-		return c.HTML(http.StatusNotFound, string(out))
+		fmt.Printf("not found %s\n", string(out))
+		panic("404 not found")
 	}
 
 	var data map[string]interface{}
@@ -50,11 +56,27 @@ func genbook(c echo.Context) error {
 	if err_m != nil {
 		fmt.Println(err_m)
 		panic(err)
-		return c.HTML(http.StatusInternalServerError, "Could not extract epub metadata: Echo internal error")
 	}
 
 	fmt.Println("Created: " + data["output_filename"].(string))
+	return data["output_filename"].(string)
+}
 
-	return c.Attachment(data["output_filename"].(string), data["output_filename"].(string))
+func triggerDownload(c echo.Context) error {
+	file_name := downloadbook(c)
+	return c.String(http.StatusOK, url.QueryEscape(file_name))
+}
 
+func downloadAndGet(c echo.Context) error {
+	file_name := downloadbook(c)
+	return c.Attachment("./books/" + file_name, file_name)
+}
+
+func getBook(c echo.Context) error {
+	file_name_encoded := c.Param("filename")
+	file_name, err := url.QueryUnescape(file_name_encoded)
+	if err != nil {
+		panic("file_name is invalid")
+	}
+	return c.Attachment("./books/" + file_name, file_name)
 }
