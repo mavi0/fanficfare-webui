@@ -4,7 +4,7 @@ WORKDIR /fanficfare
 
 RUN apk add --update py-pip git
 
-RUN pip3 install FanFicFare
+RUN pip3 install FanFicFare --upgrade
 
 RUN go mod init fanficfare
 RUN go get -d -v github.com/labstack/echo/v4 github.com/labstack/echo/v4/middleware github.com/microcosm-cc/bluemonday
